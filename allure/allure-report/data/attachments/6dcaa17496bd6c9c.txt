@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<booking>
+    <firstname>dat</firstname>
+    <lastname>nguyen</lastname>
+    <totalprice>39</totalprice>
+    <depositpaid>true</depositpaid>
+    <bookingdates>
+        <checkin>2024-01-01</checkin>
+        <checkout>2024-12-31</checkout>
+    </bookingdates>
+    <additionalneeds>thu vien nua dem</additionalneeds>
+</booking>
