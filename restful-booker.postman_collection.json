@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "83a6eee4-f736-47b2-b0bc-d172342ca690",
+		"name": "restful-booker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18453804"
+	},
+	"item": [
+		{
+			"name": "json",
+			"item": [
+				{
+					"name": "create-booking-json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//validate status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"//get booking id",
+									"pm.environment.set(\"booking-id\", pm.response.json().bookingid);",
+									"//validation for api schema",
+									"const schema = JSON.parse(pm.environment.get(\"json-schema\"));",
+									"pm.test(\"Validate schema\", function () {",
+									"    pm.expect(pm.response.json().booking).to.have.jsonSchema(schema);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"{{firstname}}\",\n    \"lastname\": \"{{lastname}}\",\n    \"totalprice\": \"{{totalprice}}\",\n    \"depositpaid\": {{depositpaid}},\n    \"bookingdates\": {\n        \"checkin\": \"{{checkin}}\",\n        \"checkout\": \"{{checkout}}\"\n    },\n    \"additionalneeds\": \"{{additionalneeds}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-booking-json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//validate status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"//validate first name",
+									"pm.test(\"First name is correct\", function () {",
+									"    pm.expect(pm.response.json().firstname).to.eql(pm.environment.get(\"firstname\"));",
+									"});",
+									"//validate last name",
+									"pm.test(\"Last name is correct\", function () {",
+									"    pm.expect(pm.response.json().lastname).to.eql(pm.environment.get(\"lastname\"));",
+									"});",
+									"//validation for api schema",
+									"const schema = JSON.parse(pm.environment.get(\"json-schema\"));",
+									"pm.test(\"Validate schema\", function () {",
+									"    pm.expect(pm.response.json()).to.have.jsonSchema(schema);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{booking-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{booking-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-booking-json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//validate information as needed",
+									"pm.test(\"Additional Needs is correct\", function () {",
+									"    pm.expect(pm.response.json().additionalneeds).to.eql(pm.environment.get(\"additionalneeds-update\"));",
+									"});",
+									"//validation for api schema",
+									"const schema = JSON.parse(pm.environment.get(\"json-schema\"));",
+									"pm.test(\"Validate schema\", function () {",
+									"    pm.expect(pm.response.json()).to.have.jsonSchema(schema);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"{{firstname}}\",\n    \"lastname\": \"{{lastname}}\",\n    \"totalprice\": \"{{totalprice}}\",\n    \"depositpaid\": {{depositpaid}},\n    \"bookingdates\": {\n        \"checkin\": \"{{checkin}}\",\n        \"checkout\": \"{{checkout}}\"\n    },\n    \"additionalneeds\": \"{{additionalneeds-update}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{booking-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{booking-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "xml",
+			"item": [
+				{
+					"name": "create-booking-xml",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//validate status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const response = xml2Json(responseBody);",
+									"//get booking id",
+									"pm.environment.set(\"booking-id\", response[\"created-booking\"][\"bookingid\"]);",
+									"//validation for api schema",
+									"const schema = pm.environment.get(\"xml-schema\");",
+									"const xml = pm.response.text();",
+									"pm.test(\"Validate schema\", function () {",
+									"    pm.expect(tv4.validate(xml,schema)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<booking>\n    <firstname>{{firstname}}</firstname>\n    <lastname>{{lastname}}</lastname>\n    <totalprice>{{totalprice}}</totalprice>\n    <depositpaid>{{depositpaid}}</depositpaid>\n    <bookingdates>\n        <checkin>{{checkin}}</checkin>\n        <checkout>{{checkout}}</checkout>\n    </bookingdates>\n    <additionalneeds>{{additionalneeds}}</additionalneeds>\n</booking>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-booking-xml",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//validate status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const response = xml2Json(responseBody);",
+									"//validate first name",
+									"pm.test(\"First name is correct\", function () {",
+									"    const firstname = response[\"booking\"][\"firstname\"];",
+									"    pm.expect(firstname).to.eql(pm.environment.get(\"firstname\"));",
+									"});",
+									"//validate last name",
+									"pm.test(\"Last name is correct\", function () {",
+									"    const lastname = response[\"booking\"][\"lastname\"];",
+									"    pm.expect(lastname).to.eql(pm.environment.get(\"lastname\"));",
+									"});",
+									"//validation for api schema",
+									"const schema = pm.environment.get(\"xml-schema\");",
+									"const xml = pm.response.text();",
+									"pm.test(\"Validate schema\", function () {",
+									"    pm.expect(tv4.validate(xml,schema)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/{{booking-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{booking-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-booking-xml",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//validate information as needed",
+									"var response = xml2Json(responseBody);",
+									"pm.test(\"Additional Needs is correct\", function () {",
+									"    var additionalNeeds = response[\"booking\"][\"additionalneeds\"];",
+									"    pm.expect(additionalNeeds).to.eql(pm.environment.get(\"additionalneeds-update\"));",
+									"});",
+									"//validation for api schema",
+									"const schema = pm.environment.get(\"xml-schema\");",
+									"const xml = pm.response.text();",
+									"pm.test(\"Validate schema\", function () {",
+									"    pm.expect(tv4.validate(xml,schema)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<booking>\n    <firstname>{{firstname}}</firstname>\n    <lastname>{{lastname}}</lastname>\n    <totalprice>{{totalprice}}</totalprice>\n    <depositpaid>{{depositpaid}}</depositpaid>\n    <bookingdates>\n        <checkin>{{checkin}}</checkin>\n        <checkout>{{checkout}}</checkout>\n    </bookingdates>\n    <additionalneeds>{{additionalneeds-update}}</additionalneeds>\n</booking>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{booking-id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{booking-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
