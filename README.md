@@ -31,7 +31,9 @@ allure serve allure/allure-results
 > If your browser is not opened. Click on the link as `Server started at <http://192.168.1.112:38877/>. Press <Ctrl+C> to exit`
 ## Generate reports on your own
 > Dependencies: npm, newman, newman-reporter-htmlextra, newman-reporter-allure
+
 Install npm (depending on your OS, check npm if it exists: npm -v)
+
 Install newman
 ```
 npm install -g newman
