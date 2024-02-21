@@ -1,9 +1,9 @@
 # Restful-booker (API test using Postman and newman reports generated)
 ## Reports Preview
 ### htmlextra report
-![alt text](https://github.com/ntdsrd/restful-booker-postman/blob/master/preview/htmlextra.png)
+![htmlextra](https://github.com/ntdsrd/restful-booker-postman/blob/master/preview/htmlextra.png)
 ### allure report
-![alt text](https://github.com/ntdsrd/restful-booker-postman/blob/master/preview/allure.png)
+![allure](https://github.com/ntdsrd/restful-booker-postman/blob/master/preview/allure.png)
 ## How to open reports
 Clone project
 ```
@@ -13,7 +13,9 @@ git clone https://github.com/ntdsrd/restful-booker-postman.git
 Open htmlextra/report.html on your browser
 ### allure report
 > Dependencies: npm, allure-commandline
+
 Install npm (depending on your OS, check npm if it exists: npm -v)
+
 Install allure-commandline
 ```
 npm install -g --save-dev allure-commandline
