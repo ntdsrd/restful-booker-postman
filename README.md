@@ -28,7 +28,7 @@ or
 ```
 allure serve allure/allure-results
 ```
-> If your browser is not opened. Click on the link as `Server started at <http://192.168.1.112:38877/>. Press <Ctrl+C> to exit`
+> If your browser is not opened, click on the link as `Server started at <http://192.168.1.112:38877/>. Press <Ctrl+C> to exit`
 ## Generate reports on your own
 > Dependencies: npm, newman, newman-reporter-htmlextra, newman-reporter-allure
 
@@ -58,6 +58,7 @@ Generate allure results
 newman run <collection> -e <environment> -r allure --reporter-allure-export <path>
 ```
 > Path: folder contains allure results -> allure/allure-results
+
 Install allure-commandline
 ```
 npm install -g --save-dev allure-commandline
