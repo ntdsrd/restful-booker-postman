@@ -12,7 +12,7 @@
 
 ## Open project with Postman
 
-Open collection `restful-booker.postman_collection.json` and environment `prod.postman_environment.json` by Postman to run the test.
+Open collection `restful-booker.postman_collection.json` and environment `prod.postman_environment.json` by Postman to run the test
 
 Click on each request and go to Tests to see test scripts
 
