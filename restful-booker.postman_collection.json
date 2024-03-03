@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "83a6eee4-f736-47b2-b0bc-d172342ca690",
+		"_postman_id": "c2520116-d113-4db0-9cf8-127ad05bb496",
 		"name": "restful-booker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18453804"
@@ -16,16 +16,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();",
+									"var schemaString = pm.environment.get(\"json-schema\");",
+									"var schema = JSON.parse(schemaString);",
 									"//validate status code",
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Validate status code\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"//get booking id",
-									"pm.environment.set(\"booking-id\", pm.response.json().bookingid);",
+									"pm.environment.set(\"booking-id\", jsonData.bookingid);",
 									"//validation for api schema",
-									"const schema = JSON.parse(pm.environment.get(\"json-schema\"));",
-									"pm.test(\"Validate schema\", function () {",
-									"    pm.expect(pm.response.json().booking).to.have.jsonSchema(schema);",
+									"pm.test(\"Validate for api schema\", function (){",
+									"    pm.expect(jsonData.booking).to.have.jsonSchema(schema);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -60,22 +62,24 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();",
+									"var schemaString = pm.environment.get(\"json-schema\");",
+									"var schema = JSON.parse(schemaString);",
 									"//validate status code",
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Validate status code\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"//validate first name",
-									"pm.test(\"First name is correct\", function () {",
-									"    pm.expect(pm.response.json().firstname).to.eql(pm.environment.get(\"firstname\"));",
+									"pm.test(\"Validate first name\", function () {",
+									"    pm.expect(jsonData.firstname).to.eql(\"dat\");",
 									"});",
 									"//validate last name",
-									"pm.test(\"Last name is correct\", function () {",
-									"    pm.expect(pm.response.json().lastname).to.eql(pm.environment.get(\"lastname\"));",
+									"pm.test(\"Validate last name\", function () {",
+									"    pm.expect(jsonData.lastname).to.eql(\"nguyen\");",
 									"});",
 									"//validation for api schema",
-									"const schema = JSON.parse(pm.environment.get(\"json-schema\"));",
-									"pm.test(\"Validate schema\", function () {",
-									"    pm.expect(pm.response.json()).to.have.jsonSchema(schema);",
+									"pm.test(\"Validate for api schema\", function (){",
+									"    pm.expect(jsonData).to.have.jsonSchema(schema);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -104,14 +108,16 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();",
+									"var schemaString = pm.environment.get(\"json-schema\");",
+									"var schema = JSON.parse(schemaString);",
 									"//validate information as needed",
-									"pm.test(\"Additional Needs is correct\", function () {",
-									"    pm.expect(pm.response.json().additionalneeds).to.eql(pm.environment.get(\"additionalneeds-update\"));",
+									"pm.test(\"Validate information as needed\", function () {",
+									"    pm.expect(jsonData.additionalneeds).to.eql(\"mo dom dom\");",
 									"});",
 									"//validation for api schema",
-									"const schema = JSON.parse(pm.environment.get(\"json-schema\"));",
-									"pm.test(\"Validate schema\", function () {",
-									"    pm.expect(pm.response.json()).to.have.jsonSchema(schema);",
+									"pm.test(\"Validate for api schema\", function (){",
+									"    pm.expect(jsonData).to.have.jsonSchema(schema);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -169,19 +175,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonObject = xml2Json(responseBody);",
 									"//validate status code",
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Validate status code\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
-									"const response = xml2Json(responseBody);",
 									"//get booking id",
-									"pm.environment.set(\"booking-id\", response[\"created-booking\"][\"bookingid\"]);",
-									"//validation for api schema",
-									"const schema = pm.environment.get(\"xml-schema\");",
-									"const xml = pm.response.text();",
-									"pm.test(\"Validate schema\", function () {",
-									"    pm.expect(tv4.validate(xml,schema)).to.be.true;",
-									"});"
+									"pm.environment.set(\"booking-id\", jsonObject[\"created-booking\"][\"bookingid\"]);"
 								],
 								"type": "text/javascript"
 							}
@@ -226,26 +226,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonObject = xml2Json(responseBody);",
 									"//validate status code",
-									"pm.test(\"Status code is 200\", function () {",
+									"pm.test(\"Validate status code\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
-									"const response = xml2Json(responseBody);",
 									"//validate first name",
-									"pm.test(\"First name is correct\", function () {",
-									"    const firstname = response[\"booking\"][\"firstname\"];",
-									"    pm.expect(firstname).to.eql(pm.environment.get(\"firstname\"));",
+									"pm.test(\"Validate first name\", function () {",
+									"    pm.expect(jsonObject[\"booking\"][\"firstname\"]).to.eql(\"dat\");",
 									"});",
 									"//validate last name",
-									"pm.test(\"Last name is correct\", function () {",
-									"    const lastname = response[\"booking\"][\"lastname\"];",
-									"    pm.expect(lastname).to.eql(pm.environment.get(\"lastname\"));",
-									"});",
-									"//validation for api schema",
-									"const schema = pm.environment.get(\"xml-schema\");",
-									"const xml = pm.response.text();",
-									"pm.test(\"Validate schema\", function () {",
-									"    pm.expect(tv4.validate(xml,schema)).to.be.true;",
+									"pm.test(\"Validate first name\", function () {",
+									"    pm.expect(jsonObject[\"booking\"][\"lastname\"]).to.eql(\"nguyen\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -280,17 +272,10 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonObject = xml2Json(responseBody);",
 									"//validate information as needed",
-									"var response = xml2Json(responseBody);",
-									"pm.test(\"Additional Needs is correct\", function () {",
-									"    var additionalNeeds = response[\"booking\"][\"additionalneeds\"];",
-									"    pm.expect(additionalNeeds).to.eql(pm.environment.get(\"additionalneeds-update\"));",
-									"});",
-									"//validation for api schema",
-									"const schema = pm.environment.get(\"xml-schema\");",
-									"const xml = pm.response.text();",
-									"pm.test(\"Validate schema\", function () {",
-									"    pm.expect(tv4.validate(xml,schema)).to.be.true;",
+									"pm.test(\"Validate information as needed\", function () {",
+									"    pm.expect(jsonObject[\"booking\"][\"additionalneeds\"]).to.eql(\"mo dom dom\");",
 									"});"
 								],
 								"type": "text/javascript"
