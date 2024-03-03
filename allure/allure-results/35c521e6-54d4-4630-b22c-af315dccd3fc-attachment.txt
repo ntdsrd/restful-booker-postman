@@ -1,0 +1,5 @@
+var jsonObject = xml2Json(responseBody);
+//validate information as needed
+pm.test("Validate information as needed", function () {
+    pm.expect(jsonObject["booking"]["additionalneeds"]).to.eql("mo dom dom");
+});

@@ -1,0 +1,11 @@
+var jsonData = pm.response.json();
+var schemaString = pm.environment.get("json-schema");
+var schema = JSON.parse(schemaString);
+//validate information as needed
+pm.test("Validate information as needed", function () {
+    pm.expect(jsonData.additionalneeds).to.eql("mo dom dom");
+});
+//validation for api schema
+pm.test("Validate for api schema", function (){
+    pm.expect(jsonData).to.have.jsonSchema(schema);
+});
