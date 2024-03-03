@@ -1,0 +1,7 @@
+var jsonObject = xml2Json(responseBody);
+//validate status code
+pm.test("Validate status code", function () {
+    pm.response.to.have.status(200);
+});
+//get booking id
+pm.environment.set("booking-id", jsonObject["created-booking"]["bookingid"]);

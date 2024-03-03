@@ -1,9 +1,0 @@
-//validate information as needed
-pm.test("Additional Needs is correct", function () {
-    pm.expect(pm.response.json().additionalneeds).to.eql(pm.environment.get("additionalneeds-update"));
-});
-//validation for api schema
-const schema = JSON.parse(pm.environment.get("json-schema"));
-pm.test("Validate schema", function () {
-    pm.expect(pm.response.json()).to.have.jsonSchema(schema);
-});

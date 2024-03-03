@@ -1,0 +1,13 @@
+var jsonData = pm.response.json();
+var schemaString = pm.environment.get("json-schema");
+var schema = JSON.parse(schemaString);
+//validate status code
+pm.test("Validate status code", function () {
+    pm.response.to.have.status(200);
+});
+//get booking id
+pm.environment.set("booking-id", jsonData.bookingid);
+//validation for api schema
+pm.test("Validate for api schema", function (){
+    pm.expect(jsonData.booking).to.have.jsonSchema(schema);
+});

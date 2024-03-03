@@ -1,0 +1,13 @@
+var jsonObject = xml2Json(responseBody);
+//validate status code
+pm.test("Validate status code", function () {
+    pm.response.to.have.status(200);
+});
+//validate first name
+pm.test("Validate first name", function () {
+    pm.expect(jsonObject["booking"]["firstname"]).to.eql("dat");
+});
+//validate last name
+pm.test("Validate first name", function () {
+    pm.expect(jsonObject["booking"]["lastname"]).to.eql("nguyen");
+});
