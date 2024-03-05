@@ -1,6 +1,5 @@
 var jsonData = pm.response.json();
-var schemaString = pm.environment.get("json-schema");
-var schema = JSON.parse(schemaString);
+var schema = JSON.parse(pm.environment.get("json-schema"));
 //validate status code
 pm.test("Validate status code", function () {
     pm.response.to.have.status(200);
@@ -15,5 +14,5 @@ pm.test("Validate last name", function () {
 });
 //validation for api schema
 pm.test("Validate for api schema", function (){
-    pm.expect(jsonData).to.have.jsonSchema(schema);
+    pm.expect(tv4.validate(jsonData, schema)).to.be.true;
 });
