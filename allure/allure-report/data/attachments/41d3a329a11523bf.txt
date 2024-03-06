@@ -1,0 +1,1 @@
+{"bookingid":4869,"booking":{"firstname":"dat","lastname":"nguyen","totalprice":39,"depositpaid":true,"bookingdates":{"checkin":"2024-01-01","checkout":"2024-12-31"},"additionalneeds":"thu vien nua dem"}}
