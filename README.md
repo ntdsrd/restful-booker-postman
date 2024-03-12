@@ -37,7 +37,7 @@ Install npm (depending on your OS, check npm if it exists: npm -v)
 Install allure-commandline
 
 ```
-npm install -g --save-dev allure-commandline
+npm install -g allure-commandline
 ```
 
 Open allure report
