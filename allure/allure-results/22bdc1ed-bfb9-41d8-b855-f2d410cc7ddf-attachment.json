@@ -1,9 +1,11 @@
 {
+    "Content-Type": "text/xml",
     "Accept": "application/xml",
     "User-Agent": "PostmanRuntime/7.37.1",
     "Cache-Control": "no-cache",
-    "Postman-Token": "44d1ddc1-22ab-4cd0-872b-b33dca078927",
+    "Postman-Token": "1571106c-715c-43c9-b2aa-ce2bf701c5b1",
     "Host": "restful-booker.herokuapp.com",
     "Accept-Encoding": "gzip, deflate, br",
-    "Connection": "keep-alive"
+    "Connection": "keep-alive",
+    "Content-Length": "324"
 }

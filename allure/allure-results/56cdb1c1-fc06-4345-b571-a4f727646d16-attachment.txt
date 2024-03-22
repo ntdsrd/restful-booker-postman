@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <created-booking>
-    <bookingid>3692</bookingid>
+    <bookingid>1754</bookingid>
     <booking>
         <firstname>dat</firstname>
         <lastname>nguyen</lastname>
